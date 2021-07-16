@@ -1,0 +1,41 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/gameIndex/index",
+			"style": {
+				"navigationBarTitleText": "歌词接龙"
+			}
+		}
+	    ,{
+            "path" : "pages/mine/mine",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath":"pages/gameIndex/index",
+				"iconPath":"static/images/game.png",
+				"selectedIconPath":"static/images/game-active.svg",
+				"text":"游戏"
+			},
+			{
+				"pagePath":"pages/mine/mine",
+				"iconPath":"static/images/mine.png",
+				"selectedIconPath":"static/images/mine-active.png",
+				"text":"游戏"
+			}
+		]
+	}
+}
