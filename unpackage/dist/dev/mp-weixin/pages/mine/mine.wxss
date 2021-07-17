@@ -1,0 +1,30 @@
+.mine .userInfo {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+.mine .userInfo .avatar {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.mine .userInfo .user-nickname {
+  -webkit-box-flex: 2;
+  -webkit-flex: 2;
+          flex: 2;
+}
+.mine .userInfo .user-nickname .top {
+  margin-bottom: 10rpx;
+}
+.mine .userInfo .user-nickname .top .nickname {
+  font-size: 16px;
+}
+.mine .userInfo .user-nickname .level {
+  color: #999;
+}
+

@@ -1,11 +1,11 @@
 <template>
 	<view class="content">
-		<image class="logo" src="../../static/logo.png" mode=""></image>
+		<image class="logo" src="../../../static/logo.png" mode=""></image>
 		<view class="play-cate">
-			<view class="cate-item man-machine">
+			<view class="cate-item man-machine" @click="handleSkipGame(1)">
 				人机接龙
 			</view>
-			<view class="cate-item on-line">
+			<view class="cate-item on-line" @click="handleSkipGame(2)">
 				歌词联机
 			</view>
 		</view>
@@ -26,7 +26,12 @@
 
 		},
 		methods: {
-
+			//跳转至游戏界面
+			handleSkipGame (flag) {
+				uni.navigateTo({
+					url: '/pages/game/game/game?mode=' + flag
+				})
+			}
 		}
 	}
 </script>

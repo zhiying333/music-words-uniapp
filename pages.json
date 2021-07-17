@@ -1,7 +1,10 @@
 {
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/gameIndex/index",
+			"path": "pages/game/index/index",
 			"style": {
 				"navigationBarTitleText": "歌词接龙"
 			}
@@ -10,11 +13,17 @@
             "path" : "pages/mine/mine",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "个人中心",
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+			"path":"pages/game/game/game",
+			"style": {
+				"navigationBarTitleText":"游戏页"
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -25,16 +34,16 @@
 	"tabBar": {
 		"list": [
 			{
-				"pagePath":"pages/gameIndex/index",
+				"pagePath":"pages/game/index/index",
 				"iconPath":"static/images/game.png",
-				"selectedIconPath":"static/images/game-active.svg",
+				"selectedIconPath":"static/images/game-active.png",
 				"text":"游戏"
 			},
 			{
 				"pagePath":"pages/mine/mine",
 				"iconPath":"static/images/mine.png",
 				"selectedIconPath":"static/images/mine-active.png",
-				"text":"游戏"
+				"text":"我的"
 			}
 		]
 	}
