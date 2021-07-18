@@ -153,7 +153,30 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var BannerAd = function BannerAd() {__webpack_require__.e(/*! require.ensure | components/AD/bannerAD/bannerAD */ "components/AD/bannerAD/bannerAD").then((function () {return resolve(__webpack_require__(/*! ../../components/AD/bannerAD/bannerAD.vue */ 71));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var BannerAd = function BannerAd() {__webpack_require__.e(/*! require.ensure | components/AD/bannerAD/bannerAD */ "components/AD/bannerAD/bannerAD").then((function () {return resolve(__webpack_require__(/*! ../../components/AD/bannerAD/bannerAD.vue */ 71));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -187,10 +210,42 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   data: function data() {
     return {
-      src: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg'
+      src: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg',
       // text: '无头像'
+      isUserProfile: false, //判断uni.getUserProfile是否可以
+      userInfo: {} //用户信息
     };
-  } };exports.default = _default;
+  },
+
+  onLoad: function onLoad() {
+    if (uni.getUserProfile) {
+      this.isUserProfile = true;
+    }
+  },
+
+  computed: {
+    genderCate: function genderCate() {
+      if (this.userInfo.gender) {
+        return this.userInfo.gender === 2 ? 'woman' : 'man';
+      }
+    } },
+
+
+  methods: {
+    handleGetUserProfile: function handleGetUserProfile() {
+      var that = this;
+      uni.getUserProfile({
+        desc: '用户授权登录',
+        success: function success(res) {
+          console.log(res);
+          that.userInfo = res.userInfo;
+        } });
+
+    },
+    handleGetUserInfo: function handleGetUserInfo(e) {
+      console.log(e.detail.userInfo);
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

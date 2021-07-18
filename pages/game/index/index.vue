@@ -37,6 +37,11 @@
 </script>
 
 <style lang="less">
+	/*#ifdef MP-WEIXIN*/
+	page {
+		height: 100%;
+	}
+	/*#endif*/
 	uni-page-body {
 		height: 100%;
 	}

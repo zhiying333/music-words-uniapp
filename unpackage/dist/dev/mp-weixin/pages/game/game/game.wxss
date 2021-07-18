@@ -5,10 +5,188 @@ uni-page-body {
   height: 100%;
 }
 .game-page .bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
+  z-index: -1;
 }
 .game-page .bg .bg-img {
   width: 100%;
   height: 100%;
+}
+.game-page .play-user {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  text-align: center;
+}
+.game-page .play-user .user-item {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  padding: 30rpx;
+}
+.game-page .play-user .user-item .avatar {
+  margin-bottom: 10rpx;
+}
+.game-page .words-song {
+  margin-top: 10rpx;
+  padding: 30rpx;
+  font-size: 16px;
+  line-height: 35px;
+  color: #fff;
+}
+.game-page .words-song .top,
+.game-page .words-song .bottom {
+  position: relative;
+  height: 35px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.game-page .words-song .top {
+  margin-left: 20rpx;
+}
+.game-page .words-song .top .t-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  color: yellow;
+  overflow: hidden;
+}
+.game-page .words-song .bottom .b-text {
+  position: absolute;
+  top: 0;
+  width: 0;
+  right: 30rpx;
+  color: yellow;
+  overflow: hidden;
+}
+.game-page .words-song .bottom .two {
+  margin-left: 450rpx;
+}
+.game-page .play-tips {
+  margin-top: 10rpx;
+}
+.game-page .down-time {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin-top: 20rpx;
+}
+.game-page .down-time .timer {
+  width: 300rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #f00;
+  color: #fff;
+  text-align: center;
+  border-radius: 40rpx;
+}
+.game-page .answer {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin-top: 10rpx;
+}
+.game-page .answer .gif-img {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  width: 150rpx;
+  height: 80rpx;
+  border-radius: 20rpx;
+  background: skyblue;
+}
+.game-page .answer .gif-img .left,
+.game-page .answer .gif-img .right {
+  width: 64rpx;
+  height: 32rpx;
+}
+.game-page .answer .gif-img .left {
+  -webkit-animation: left 0.8s linear infinite;
+          animation: left 0.8s linear infinite;
+}
+.game-page .answer .gif-img .right {
+  -webkit-animation: right 0.8s linear infinite;
+          animation: right 0.8s linear infinite;
+}
+.game-page .answer .a-img .img {
+  width: 128rpx;
+  height: 128rpx;
+}
+@-webkit-keyframes textW {
+from {
+    width: 0;
+}
+to {
+    width: 100%;
+}
+}
+@keyframes textW {
+from {
+    width: 0;
+}
+to {
+    width: 100%;
+}
+}
+@-webkit-keyframes left {
+50% {
+    -webkit-transform: scaleY(1.2);
+            transform: scaleY(1.2);
+}
+100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+}
+}
+@keyframes left {
+50% {
+    -webkit-transform: scaleY(1.2);
+            transform: scaleY(1.2);
+}
+100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+}
+}
+@-webkit-keyframes right {
+50% {
+    -webkit-transform: scaleY(0.8);
+            transform: scaleY(0.8);
+}
+100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+}
+}
+@keyframes right {
+50% {
+    -webkit-transform: scaleY(0.8);
+            transform: scaleY(0.8);
+}
+100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+}
 }
 

@@ -1,0 +1,63 @@
+.wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.wrap .song {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  width: 300rpx;
+  height: 300rpx;
+  border-radius: 50%;
+  background: skyblue;
+  -webkit-transition: -webkit-transform 60s;
+  transition: -webkit-transform 60s;
+  transition: transform 60s;
+  transition: transform 60s, -webkit-transform 60s;
+  -webkit-animation: turntable 10s linear infinite;
+          animation: turntable 10s linear infinite;
+}
+.wrap .song .turntable {
+  width: 280rpx;
+  height: 280rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.wrap .song .turntable .s-img {
+  width: 100%;
+  height: 100%;
+}
+@-webkit-keyframes turntable {
+from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+@keyframes turntable {
+from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+}
+to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+}
+}
+

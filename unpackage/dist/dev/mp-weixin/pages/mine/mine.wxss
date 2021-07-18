@@ -27,4 +27,12 @@
 .mine .userInfo .user-nickname .level {
   color: #999;
 }
+.mine .userInfo .login {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.mine .userInfo .login .btn {
+  font-size: 16px;
+}
 

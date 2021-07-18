@@ -3,13 +3,37 @@
 		<!-- 用户信息 -->
 		<view class="userInfo">
 			<view class="avatar">
-				<u-avatar :src="src" mode="circle" show-sex></u-avatar>
+				<u-avatar
+					:src="userInfo.avatarUrl ? userInfo.avatarUrl : src"
+					mode="circle"
+					:show-sex="userInfo.gender"
+					:sex-icon="genderCate"
+				>
+				</u-avatar>
 			</view>
 			<view class="user-nickname">
 				<view class="top">
-					<text class="nickname">之之酱</text>
+					<text class="nickname">{{userInfo.nickName ? userInfo.nickName : '之之酱'}}</text>
 				</view>
 				<text class="level">等级1</text>
+			</view>
+			<view class="login" v-if="!userInfo.nickName">
+				<button
+					type="default"
+					@click="handleGetUserProfile"
+					v-if="isUserProfile"
+				>
+					登录
+				</button>
+				<button
+					type="default"
+					plain
+					open-type="getUserInfo"
+					@getuserinfo="handleGetUserInfo"
+					v-else
+				>
+					登录
+				</button>
 			</view>
 		</view>
 		<!-- 签到，帮助 -->
@@ -33,7 +57,39 @@
 			return {
 				src: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg',
 				// text: '无头像'
+				isUserProfile: false,//判断uni.getUserProfile是否可以
+				userInfo: {},//用户信息
 			};
+		},
+		
+		onLoad() {
+			if (uni.getUserProfile) {
+				this.isUserProfile = true
+			}
+		},
+		
+		computed: {
+			genderCate () {
+				if (this.userInfo.gender) {
+					return this.userInfo.gender === 2 ? 'woman' : 'man'
+				}
+			}
+		},
+		
+		methods: {
+			handleGetUserProfile () {
+				let that = this;
+				uni.getUserProfile({
+					desc: '用户授权登录',
+					success(res) {
+						console.log(res)
+						that.userInfo = res.userInfo
+					}
+				})
+			},
+			handleGetUserInfo (e) {
+				console.log(e.detail.userInfo)
+			}
 		}
 	}
 </script>
@@ -58,6 +114,13 @@
 				}
 				.level {
 					color: #999;
+				}
+			}
+			.login {
+				flex: 1;
+				.btn {
+					font-size: 16px;
+					// border: none;
 				}
 			}
 		}
