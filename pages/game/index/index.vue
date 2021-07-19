@@ -23,7 +23,23 @@
 			}
 		},
 		onLoad() {
-
+			uniCloud.callFunction({
+				name:'handleControl',
+				data: {
+					action: 'test/sayHello',
+				}
+			}).then( res => {
+				console.log('响应',res)
+			})
+			
+			uniCloud.callFunction({
+				name:'handleControl',
+				data: {
+					action: 'test/uploadMusic',
+				}
+			}).then( res => {
+				console.log('响应2',res)
+			})
 		},
 		methods: {
 			//跳转至游戏界面

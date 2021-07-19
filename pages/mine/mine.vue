@@ -58,7 +58,7 @@
 				src: 'http://pic2.sc.chinaz.com/Files/pic/pic9/202002/hpic2119_s.jpg',
 				// text: '无头像'
 				isUserProfile: false,//判断uni.getUserProfile是否可以
-				userInfo: {},//用户信息
+				// userInfo: {},//用户信息 在vuex中定义后，可在页面直接使用
 			};
 		},
 		
@@ -70,6 +70,10 @@
 		
 		computed: {
 			genderCate () {
+				// if (this.userInfo.gender) {
+				// 	return this.userInfo.gender === 2 ? 'woman' : 'man'
+				// }
+				
 				if (this.userInfo.gender) {
 					return this.userInfo.gender === 2 ? 'woman' : 'man'
 				}
@@ -83,7 +87,9 @@
 					desc: '用户授权登录',
 					success(res) {
 						console.log(res)
-						that.userInfo = res.userInfo
+						// that.userInfo = res.userInfo
+						//在uViewui封装的vuex中修改状态数据
+						that.$u.vuex('userInfo',res.userInfo)
 					}
 				})
 			},

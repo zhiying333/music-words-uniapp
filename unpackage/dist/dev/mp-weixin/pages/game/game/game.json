@@ -3,6 +3,7 @@
   "usingComponents": {
     "u-avatar": "/uview-ui/components/u-avatar/u-avatar",
     "u-notice-bar": "/uview-ui/components/u-notice-bar/u-notice-bar",
+    "u-button": "/uview-ui/components/u-button/u-button",
     "song": "/components/Song/song"
   }
 }

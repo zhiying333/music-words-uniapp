@@ -31,6 +31,18 @@ uni-page-body {
 .game-page .play-user .user-item .avatar {
   margin-bottom: 10rpx;
 }
+.game-page .play-tips {
+  margin-top: 10rpx;
+}
+.game-page .start-play {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin-top: 10rpx;
+}
 .game-page .words-song {
   margin-top: 10rpx;
   padding: 30rpx;
@@ -67,9 +79,6 @@ uni-page-body {
 .game-page .words-song .bottom .two {
   margin-left: 450rpx;
 }
-.game-page .play-tips {
-  margin-top: 10rpx;
-}
 .game-page .down-time {
   display: -webkit-box;
   display: -webkit-flex;
@@ -88,7 +97,14 @@ uni-page-body {
   text-align: center;
   border-radius: 40rpx;
 }
-.game-page .answer {
+.game-page .voice-box {
+  position: absolute;
+  bottom: 30rpx;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+}
+.game-page .voice-box .answer {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -99,9 +115,8 @@ uni-page-body {
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
-  margin-top: 10rpx;
 }
-.game-page .answer .gif-img {
+.game-page .voice-box .answer .gif-img {
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -115,21 +130,22 @@ uni-page-body {
   height: 80rpx;
   border-radius: 20rpx;
   background: skyblue;
+  margin-bottom: 10rpx;
 }
-.game-page .answer .gif-img .left,
-.game-page .answer .gif-img .right {
+.game-page .voice-box .answer .gif-img .left,
+.game-page .voice-box .answer .gif-img .right {
   width: 64rpx;
   height: 32rpx;
 }
-.game-page .answer .gif-img .left {
-  -webkit-animation: left 0.8s linear infinite;
-          animation: left 0.8s linear infinite;
+.game-page .voice-box .answer .gif-img .left {
+  -webkit-animation: left 0.3s linear infinite;
+          animation: left 0.3s linear infinite;
 }
-.game-page .answer .gif-img .right {
-  -webkit-animation: right 0.8s linear infinite;
-          animation: right 0.8s linear infinite;
+.game-page .voice-box .answer .gif-img .right {
+  -webkit-animation: right 0.3s linear infinite;
+          animation: right 0.3s linear infinite;
 }
-.game-page .answer .a-img .img {
+.game-page .voice-box .answer .a-img .img {
   width: 128rpx;
   height: 128rpx;
 }

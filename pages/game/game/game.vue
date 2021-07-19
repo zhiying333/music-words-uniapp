@@ -24,7 +24,21 @@
 		<view class="song-turntable">
 			<Song></Song>
 		</view>
-		<view class="words-song">
+		<view class="play-tips">
+			<u-notice-bar mode="horizontal" :list="list"></u-notice-bar>
+		</view>
+		<view class="start-play" v-if="!isPlay">
+			<u-button
+				type="primary"
+				size="medium"
+				class="pBtn"
+				ripple
+				@click="handleStartGame"
+			>
+				开始游戏
+			</u-button>
+		</view>
+		<view class="words-song" v-else>
 			<view class="tips">
 				<!-- {{ player ? players : '人机小白白' }} -->
 				人机小白白:
@@ -38,25 +52,28 @@
 				<text class="two">我栖息的夏天</text>
 			</view>
 		</view>
-		<view class="play-tips">
-			<u-notice-bar mode="horizontal" :list="list"></u-notice-bar>
-		</view>
 		<!-- <view class="music">
 			<audio class="audio" style="text-align: left" :src="current.src" :poster="current.poster" :name="current.name" :author="current.author" :action="audioAction" controls></audio>
 		</view> -->
 		<!-- 倒计时 -->
-		<view class="down-time">
+		<view class="down-time" v-if="isPlay">
 			<view class="timer">
 				倒计时{{downTime}}秒
 			</view>
 		</view>
-		<view class="answer">
-			<view class="gif-img">
-				<image class="left" src="/static/images/left.png" mode=""></image>
-				<image class="right" src="/static/images/right.png" mode=""></image>
-			</view>
-			<view class="a-img">
-				<image class="img" src="/static/images/mkf.png" mode=""></image>
+		<view class="voice-box">
+			<view class="answer">
+				<view class="gif-img" v-if="isVoice">
+					<image class="left" src="/static/images/left.png" mode=""></image>
+					<image class="right" src="/static/images/right.png" mode=""></image>
+				</view>
+				<view
+					class="a-img"
+					@touchstart="handleTouchStart"
+					@touchend="handleTouchEnd"
+				>
+					<image class="img" src="/static/images/mkf.png"></image>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -64,6 +81,10 @@
 
 <script>
 	import Song from '../../../components/Song/song.vue'
+	
+	var plugin = requirePlugin("WechatSI")  
+	let manager = plugin.getRecordRecognitionManager();
+		
 	export default {
 		components: {
 			Song
@@ -75,18 +96,65 @@
 				list: [
 					'请以第二句歌词末尾的字或同音字开头，接两句歌词'
 				],
-				// current: {
-				// 	poster: 'https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-uni-app-doc/7fbf26a0-4f4a-11eb-b680-7980c8a877b8.png',
-				// 	name: '致爱丽丝',
-				// 	author: '暂无',
-				// 	src: '../../../static/music/audio.mp3',
-				// },//当前播放音乐数据
+				isPlay: false,//是否开始游戏
 				downTime: 30,//倒计时
+				isVoice: false,//是否进行语音
+				voiceState: "你可以这样说...",//语音识别内容
 			}
 		},
 		
 		onLoad(option) {
+			this.initRecord();//初始化语音识别
 			console.log(option.mode)
+			const innerAudioContext = uni.createInnerAudioContext();
+			// innerAudioContext.autoplay = true;
+			innerAudioContext.src = 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-d37bba87-d810-44a4-b984-a0f8cbd8f0e5/af824451-b901-4bb9-8de4-b6c3d2cb39fc.mp3';
+			innerAudioContext.startTime = 82.79;
+		},
+		
+		methods: {
+			handleStartGame () {
+				this.isPlay = true;
+			},
+			
+			handleTouchStart () {
+				console.log('手指触摸开始')
+				this.isVoice = true;
+				manager.start()
+			},
+			
+			handleTouchEnd () {
+				console.log('手指触摸结束')
+				this.isVoice = false;
+				manager.stop();
+			},
+			
+			/**  
+			* 初始化语音识别回调  
+			* 绑定语音播放开始事件  
+			*/  
+			initRecord: function() {  
+				manager.onStart = function(res) {  
+					this.voiceState ="onStart:"+ res.msg+"正在录音"  
+				};  
+				//有新的识别内容返回，则会调用此事件  
+				manager.onRecognize = (res) => {  
+					this.voiceState = "onRecognize"+res.result;  
+				}  
+
+				// 识别结束事件  
+				manager.onStop = (res) => {  
+
+					this.voiceState ="onStop"+ res.result;  
+				}  
+
+				// 识别错误事件  
+				manager.onError = (res) => {  
+
+					this.voiceState = "onError"+res.msg;  
+
+				}  
+			},  
 		}
 	}
 </script>
@@ -120,6 +188,14 @@
 					margin-bottom: 10rpx;
 				}
 			}
+		}
+		.play-tips {
+			margin-top: 10rpx;
+		}
+		.start-play {
+			display: flex;
+			justify-content: center;
+			margin-top: 10rpx;
 		}
 		.words-song {
 			margin-top: 10rpx;
@@ -163,9 +239,6 @@
 				}
 			}
 		}
-		.play-tips {
-			margin-top: 10rpx;
-		}
 		.down-time {
 			display: flex;
 			justify-content: center;
@@ -180,35 +253,42 @@
 				border-radius: 40rpx;
 			}
 		}
-		.answer {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			margin-top: 10rpx;
-			.gif-img {
+		.voice-box {
+			position: absolute;
+			bottom: 30rpx;
+			left: 50%;
+			transform: translate(-50%);
+			.answer {
 				display: flex;
-				justify-content: center;
+				flex-direction: column;
 				align-items: center;
-				width: 150rpx;
-				height: 80rpx;
-				border-radius: 20rpx;
-				background: skyblue;
-				.left,
-				.right {
-					width: 64rpx;
-					height: 32rpx;
+				// margin-top: 10rpx;
+				.gif-img {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 150rpx;
+					height: 80rpx;
+					border-radius: 20rpx;
+					background: skyblue;
+					margin-bottom: 10rpx;
+					.left,
+					.right {
+						width: 64rpx;
+						height: 32rpx;
+					}
+					.left {
+						animation: left 0.3s linear infinite;
+					}
+					.right {
+						animation: right 0.3s linear infinite;
+					}
 				}
-				.left {
-					animation: left 0.8s linear infinite;
-				}
-				.right {
-					animation: right 0.8s linear infinite;
-				}
-			}
-			.a-img {
-				.img {
-					width: 128rpx;
-					height: 128rpx;
+				.a-img {
+					.img {
+						width: 128rpx;
+						height: 128rpx;
+					}
 				}
 			}
 		}
